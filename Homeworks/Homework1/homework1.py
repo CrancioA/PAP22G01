@@ -45,7 +45,7 @@ def open_file(name, mode='r'):
 open_file('file.txt', "w")
 open_file('file.txt', "w")
 open_file('file.txt', "w")
-# open_file('file.txt', "w")
+open_file(1, "w")
 
 
 
