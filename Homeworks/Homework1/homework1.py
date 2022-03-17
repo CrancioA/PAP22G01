@@ -8,6 +8,7 @@
 """
 from functools import wraps
 
+
 def add_line(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -21,31 +22,23 @@ def add_line(func):
     return wrapper
 
 
-# def set_type(func):
-#     def inception(func):
-#         @wraps(func)
-#         def wrapper(*args, **kwargs):
-#             return func(str(*args, **kwargs))
-#         return wrapper
-#     return inception
-
-def set_type(tip):
-    def inception(func):
+def set_type(obj_type):
+    def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            return func(*map(tip, args, **kwargs))
+            return obj_type(func(*args, **kwargs))
         return wrapper
-    return inception
+    return decorator
+
 
 @set_type(str)
 @add_line
 def open_file(name, mode='r'):
     return open(name, mode)
 
-open_file('file.txt', "w")
-open_file('file.txt', "w")
-open_file('file.txt', "w")
-open_file(1, "w")
 
-
+open_file('file.txt', "w")
+open_file('file.txt', "w")
+open_file('file.txt', "w")
+open_file(1, 'w')
 
