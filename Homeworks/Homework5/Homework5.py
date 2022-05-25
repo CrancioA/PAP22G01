@@ -13,44 +13,37 @@ required just start the downloaded executable file
 current and available version.
 you can get the python version by using the command python3 --version
 """
-import subprocess
 from subprocess import Popen
-from time import sleep
+import os
+
 
 class GetPythonInfo:
 
     def first_method(self):
         result = Popen(['powershell', '-c', r"Invoke-WebRequest -Uri 'https://en.wikipedia.org/wiki/History_of_Python"
-                                            r"'-OutFile 'D:\02_Adi\02_Curs "
-                                            r"python/PAP22G01/Homeworks/Homework5/page.html'"], text=True,
-                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        stdout, stderr = result.communicate()
-        print(stdout, stderr)
+                                            r"' -OutFile 'D:\02_Adi\02_Curs "
+                                            r"python\PAP22G01\Homeworks\Homework5\page.html'"])
         print(result)
-
 
     def second_method(self):
-        result = Popen(['powershell', '-c', r"https://www.python.org/ftp/python/3.10.4/python-3.10.4-amd64.exe'"
-                        r"-OutFile 'D:\02_Adi\02_Curs"
-                        r"python/PAP22G01/Homeworks/Homework5/python-3.10.4-amd64.exe'"], text=True,
-                       stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = Popen(['powershell', '-c', r"Invoke-WebRequest -Uri 'https://www.python.org/ftp/python/3.10.4/python"
+                                            r"-3.10.4-amd64.exe' -OutFile "
+                                            r"'D:\02_Adi\02_Curs "
+                                            r"python\PAP22G01\Homeworks\Homework5\python-3.10"
+                                            r".4-amd64.exe'"])
         # stdout, stderr = result.communicate()
         # print(stdout, stderr)
-        # print(result)
-        result1 = Popen([r"D:\02_Adi\02_Curs python\PAP22G01\Homeworks\Homework5\python-3.10.4-amd64.exe"], text=True, stderr=subprocess.PIPE)
-
-        # result1.communicate(b'Cancel')
-        # result1.terminate()
-        # sleep(1)
-        # result.communicate(b'Yes')
-
+        print(result)
 
     def third_method(self):
-        result = Popen(['cmd', 'python --version' ],shell=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        print(result)
+        result = os.popen('python --version')
+        print(result.readline())
 
 
 obj = GetPythonInfo()
-# obj.first_method()
-# obj.second_method()
+print("First method: ")
+obj.first_method()
+print("Second method: ")
+obj.second_method()
+print("Third method: ")
 obj.third_method()
